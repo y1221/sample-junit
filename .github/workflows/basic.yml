@@ -1,11 +1,10 @@
 name: Basic CI
 
-run-name: action：${{github.action}}、event：${{github.event}}、job：${{github.job}}、repository：${{github.repository}}、workflow：${{github.workflow}}、workspace：${{github.workspace}}
+run-name: CI to ${{github.workflow}} by ${{github.actor}}
 
 on:
   push:
     branches:
-      - 'feature/**'
       - main
 
 jobs:
@@ -27,6 +26,7 @@ jobs:
         with:
           name: build-artifacts
           path: target/*.jar
+
   test:
     needs: build
     runs-on: ubuntu-latest
