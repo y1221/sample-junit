@@ -70,6 +70,17 @@ jobs:
         with:
           name: build-classes
           path: target/classes/
+      - name: Run Checkstyle
+        run: mvn site
+      - name: Upload Checkstyle Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkstyle-results
+          path: |
+            target/site/checkstyle.html
+            target/site/css/
+            target/site/images/
       - name: Run SpotBugs
         run: mvn spotbugs:check
       - name: Upload SpotBugs Results
